@@ -4,4 +4,12 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <servlet-name>MagicConchServlet</servlet-name>
+    <servlet-class>com.example.magicconch.MagicConchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MagicConchServlet</servlet-name>
+    <url-pattern></url-pattern>
+  </servlet-mapping>
 </web-app>
