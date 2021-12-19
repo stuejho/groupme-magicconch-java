@@ -1,6 +1,7 @@
 package com.example.magicconch;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +34,8 @@ public class MagicConchServlet extends HttpServlet {
     protected void doGet(
             HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        PrintWriter pw = response.getWriter();
+        pw.write("All hail the Magic Conch!");
     }
 
 }
