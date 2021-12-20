@@ -72,6 +72,7 @@ public class MagicConchServlet extends HttpServlet {
         final String BOT_ID = System.getenv("groupme_bot_id");
         final String MESSAGE = REQUEST_BODY_JSON.getString("text");
         final String SENDER_ID = REQUEST_BODY_JSON.getString("sender_id");
+        final String BASE_MESSAGE_ID = REQUEST_BODY_JSON.getString("id");
 
         // Make sure the message did not come from the bot
         if (SENDER_ID.equals(BOT_ID)) return;
@@ -79,8 +80,8 @@ public class MagicConchServlet extends HttpServlet {
         // Send the message (if applicable)
         if (wantsMagicConch(MESSAGE)) {
             String conchResponse = generateRandomResponse();
-            HttpResponse httpResponse = sendGroupMeBotMessage(
-                    BOT_ID, conchResponse, EMPTY_JSON_ARRAY);
+            HttpResponse httpResponse = sendGroupMeBotMessageReply(
+                    BOT_ID, conchResponse, BASE_MESSAGE_ID);
             System.out.println(httpResponse);
         }
     }
@@ -135,7 +136,53 @@ public class MagicConchServlet extends HttpServlet {
      * 
      * @param BOT_ID        the ID of the bot
      * @param MESSAGE       the message to send
-     * @param ATTACHMENTS   JSONArray object
+     * @return an HttpResponse result representing the POSTed GroupMe message.
+     * 
+     * @throws ClientProtocolException - in case of an http protocol error
+     * @throws IOException- in case of a problem or the connection was aborted
+     */
+    protected static HttpResponse sendGroupMeBotMessageBasic(
+            final String BOT_ID, final String MESSAGE)
+            throws ClientProtocolException, IOException {
+        return sendGroupMeBotMessage(BOT_ID, MESSAGE, EMPTY_JSON_ARRAY);
+    }
+
+    /**
+     * Sends a GroupMe reply message using a given bot ID, message string, and
+     * original message ID.
+     * 
+     * The message is sent using a POST request.
+     * 
+     * @param BOT_ID        the ID of the bot
+     * @param MESSAGE       the message to send
+     * @param BASE_MSG_ID   the ID of the original message to reply to
+     * @return an HttpResponse result representing the POSTed GroupMe message.
+     * 
+     * @throws ClientProtocolException - in case of an http protocol error
+     * @throws IOException- in case of a problem or the connection was aborted
+     */
+    protected static HttpResponse sendGroupMeBotMessageReply(
+            final String BOT_ID, final String MESSAGE, final String BASE_MSG_ID)
+            throws ClientProtocolException, IOException {
+        JSONObject replyAttachment = new JSONObject();
+        replyAttachment.put("type", "reply");
+        replyAttachment.put("base_reply_id", BASE_MSG_ID);
+
+        JSONArray attachments = new JSONArray();
+        attachments.put(replyAttachment);
+
+        return sendGroupMeBotMessage(BOT_ID, MESSAGE, attachments);
+    }
+
+    /**
+     * Sends a GroupMe message using a given bot ID and message string.
+     * 
+     * The message is sent using a POST request. In addition, custom attachments
+     * (reply type, image, location, etc.) can be specified.
+     * 
+     * @param BOT_ID        the ID of the bot
+     * @param MESSAGE       the message to send
+     * @param ATTACHMENTS   JSONArray object of attachments
      * @return an HttpResponse result representing the POSTed GroupMe message.
      * 
      * @throws ClientProtocolException - in case of an http protocol error
