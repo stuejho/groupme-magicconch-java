@@ -149,7 +149,8 @@ public class MagicConchServlet extends HttpServlet {
 
     /**
      * Sends a GroupMe reply message using a given bot ID, message string, and
-     * original message ID.
+     * original message ID. If the original message ID is invalid, then 400
+     * (Bad Request) may be returned.
      * 
      * The message is sent using a POST request.
      * 
@@ -164,13 +165,16 @@ public class MagicConchServlet extends HttpServlet {
     protected static HttpResponse sendGroupMeBotMessageReply(
             final String BOT_ID, final String MESSAGE, final String BASE_MSG_ID)
             throws ClientProtocolException, IOException {
+        // Specify message response type
         JSONObject replyAttachment = new JSONObject();
         replyAttachment.put("type", "reply");
         replyAttachment.put("base_reply_id", BASE_MSG_ID);
 
+        // Add attachments to array
         JSONArray attachments = new JSONArray();
         attachments.put(replyAttachment);
 
+        // Send message
         return sendGroupMeBotMessage(BOT_ID, MESSAGE, attachments);
     }
 
