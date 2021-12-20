@@ -90,6 +90,16 @@ public class MagicConchServlet extends HttpServlet {
     }
 
     /**
+     * Returns whether or not a message starts with the string /magicconch.
+     * 
+     * @param message       the input message
+     * @return true if the message starts with the substring and false else
+     */
+    private boolean wantsMagicConch(String message) {
+        return message.startsWith("/magicconch");
+    }
+
+    /**
      * Sends a GroupMe message using a given bot ID and message string.
      * 
      * @param BOT_ID        the ID of the bot
