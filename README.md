@@ -13,6 +13,8 @@ following replies:
 * No.
 * Try asking again.
 
+<img src="images/example.png" alt="Example Magic Conch Interaction" width="300"/>
+
 ## Deployment Instructions
 
 ### Overview
