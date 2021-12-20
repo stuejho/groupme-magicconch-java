@@ -33,6 +33,11 @@ public class MagicConchServlet extends HttpServlet {
     private static final String GROUPME_BOT_POST_URL = 
             "https://api.groupme.com/v3/bots/post";
 
+    private static final String[] CONCH_RESPONSES = {
+            "Maybe someday.", "Nothing.", "Neither", "I don\'t think so.",
+            "Yes.", "No.", "Try asking again."
+    };
+
     /**
      * Default constructor.
      */
@@ -97,6 +102,17 @@ public class MagicConchServlet extends HttpServlet {
      */
     private boolean wantsMagicConch(String message) {
         return message.startsWith("/magicconch");
+    }
+
+    /**
+     * Generates a random response from the magic conch.
+     * 
+     * @return a random magic conch response
+     */
+    private String generateRandomResponse() {
+        int numResponses = CONCH_RESPONSES.length;
+        int randomIndex = (int) (Math.random() * numResponses);
+        return CONCH_RESPONSES[randomIndex];
     }
 
     /**
