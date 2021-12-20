@@ -98,6 +98,7 @@ $ git push heroku master
 1. Return to the [GroupMe Bots](https://dev.groupme.com/) site and click "Edit"
    for your bot
 1. Paste in the Web URL from earlier into the "Callback URL" field
+![Add Callback URL to Bot](images/groupme_add_callback.png)
 1. Click "Submit" to save the changes
 1. Try sending `/magicconch Can I have something to eat?` in your GroupMe group and
    see if it works
