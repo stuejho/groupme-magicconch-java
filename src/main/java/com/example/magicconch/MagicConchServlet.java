@@ -41,7 +41,7 @@ public class MagicConchServlet extends HttpServlet {
             "https://api.groupme.com/v3/bots/post";
 
     private static final String[] CONCH_RESPONSES = {
-            "Maybe someday.", "Nothing.", "Neither", "I don\'t think so.",
+            "Maybe someday.", "Nothing.", "Neither.", "I don\'t think so.",
             "Yes.", "No.", "Try asking again."
     };
 
