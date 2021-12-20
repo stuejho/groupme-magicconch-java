@@ -67,9 +67,12 @@ public class MagicConchServlet extends HttpServlet {
         // Make sure the message did not come from the bot
         if (SENDER_ID.equals(BOT_ID)) return;
 
-        // Send the message
-        HttpResponse httpResponse = sendMessage(BOT_ID, MESSAGE);
-        System.out.println(httpResponse);
+        // Send the message (if applicable)
+        if (wantsMagicConch(MESSAGE)) {
+            String conchResponse = generateRandomResponse();
+            HttpResponse httpResponse = sendMessage(BOT_ID, conchResponse);
+            System.out.println(httpResponse);
+        }
     }
 
     /**
