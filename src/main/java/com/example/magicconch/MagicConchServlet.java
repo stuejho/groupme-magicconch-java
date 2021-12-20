@@ -76,7 +76,7 @@ public class MagicConchServlet extends HttpServlet {
         // Send the message (if applicable)
         if (wantsMagicConch(MESSAGE)) {
             String conchResponse = generateRandomResponse();
-            HttpResponse httpResponse = sendMessage(BOT_ID, conchResponse);
+            HttpResponse httpResponse = sendGroupMeBotMessage(BOT_ID, conchResponse);
             System.out.println(httpResponse);
         }
     }
@@ -136,7 +136,7 @@ public class MagicConchServlet extends HttpServlet {
      * @throws ClientProtocolException - in case of an http protocol error
      * @throws IOException- in case of a problem or the connection was aborted
      */
-    private static HttpResponse sendMessage(
+    private static HttpResponse sendGroupMeBotMessage(
             final String BOT_ID, final String MESSAGE)
             throws ClientProtocolException, IOException {
         // Create a default ClosableHttpClient object
