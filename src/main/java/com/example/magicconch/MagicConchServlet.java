@@ -112,7 +112,7 @@ public class MagicConchServlet extends HttpServlet {
      * 
      * @return a random magic conch response
      */
-    private String generateRandomResponse() {
+    private static String generateRandomResponse() {
         int numResponses = CONCH_RESPONSES.length;
         int randomIndex = (int) (Math.random() * numResponses);
         return CONCH_RESPONSES[randomIndex];
