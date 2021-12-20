@@ -88,7 +88,7 @@ public class MagicConchServlet extends HttpServlet {
      * @return a JSONObject representing the request content
      * @throws IOException  if an issue occurs while reading in the content
      */
-    private JSONObject getRequestBodyJSON(HttpServletRequest request)
+    private static JSONObject getRequestBodyJSON(HttpServletRequest request)
             throws IOException {
         // Storage variables
         StringBuffer jb = new StringBuffer();
@@ -109,7 +109,7 @@ public class MagicConchServlet extends HttpServlet {
      * @param message       the input message
      * @return true if the message starts with the substring and false else
      */
-    private boolean wantsMagicConch(String message) {
+    private static boolean wantsMagicConch(String message) {
         return message.startsWith("/magicconch");
     }
 
@@ -136,7 +136,8 @@ public class MagicConchServlet extends HttpServlet {
      * @throws ClientProtocolException - in case of an http protocol error
      * @throws IOException- in case of a problem or the connection was aborted
      */
-    private HttpResponse sendMessage(final String BOT_ID, final String MESSAGE)
+    private static HttpResponse sendMessage(
+            final String BOT_ID, final String MESSAGE)
             throws ClientProtocolException, IOException {
         // Create a default ClosableHttpClient object
         HttpClient httpClient = HttpClients.createDefault();
