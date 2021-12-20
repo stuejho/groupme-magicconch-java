@@ -18,6 +18,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -43,6 +44,8 @@ public class MagicConchServlet extends HttpServlet {
             "Maybe someday.", "Nothing.", "Neither", "I don\'t think so.",
             "Yes.", "No.", "Try asking again."
     };
+
+    private static final JSONArray EMPTY_JSON_ARRAY = new JSONArray();
 
     /**
      * Default constructor.
@@ -76,7 +79,8 @@ public class MagicConchServlet extends HttpServlet {
         // Send the message (if applicable)
         if (wantsMagicConch(MESSAGE)) {
             String conchResponse = generateRandomResponse();
-            HttpResponse httpResponse = sendGroupMeBotMessage(BOT_ID, conchResponse);
+            HttpResponse httpResponse = sendGroupMeBotMessage(
+                    BOT_ID, conchResponse, EMPTY_JSON_ARRAY);
             System.out.println(httpResponse);
         }
     }
@@ -131,13 +135,14 @@ public class MagicConchServlet extends HttpServlet {
      * 
      * @param BOT_ID        the ID of the bot
      * @param MESSAGE       the message to send
+     * @param ATTACHMENTS   JSONArray object
      * @return an HttpResponse result representing the POSTed GroupMe message.
      * 
      * @throws ClientProtocolException - in case of an http protocol error
      * @throws IOException- in case of a problem or the connection was aborted
      */
     private static HttpResponse sendGroupMeBotMessage(
-            final String BOT_ID, final String MESSAGE)
+            final String BOT_ID, final String MESSAGE, final JSONArray ATTACHMENTS)
             throws ClientProtocolException, IOException {
         // Create a default ClosableHttpClient object
         HttpClient httpClient = HttpClients.createDefault();
@@ -155,6 +160,7 @@ public class MagicConchServlet extends HttpServlet {
         JSONObject json = new JSONObject();
         json.put("bot_id", BOT_ID);
         json.put("text", MESSAGE);
+        json.put("attachments", ATTACHMENTS);
 
         // Add the payload to the POST request
         String responseBody = json.toString();
