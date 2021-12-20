@@ -22,6 +22,12 @@ import org.json.JSONObject;
 
 /**
  * Servlet implementation for the MagicConchServlet class.
+ * 
+ * The doPost() method checks for a /magicconch prefix in the message text and
+ * responds with random message by sending a POST request to GroupMe.
+ * 
+ * The doGet() method returns a default exclamatory string. No messages are sent
+ * by this method.
  *
  * @author Ethan Ho
  */
