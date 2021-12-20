@@ -69,7 +69,7 @@ public class MagicConchServlet extends HttpServlet {
         final JSONObject REQUEST_BODY_JSON = getRequestBodyJSON(request);
 
         // Response information
-        final String BOT_ID = System.getenv("groupme_bot_id");
+        final String BOT_ID = System.getenv("GROUPME_BOT_ID");
         final String MESSAGE = REQUEST_BODY_JSON.getString("text");
         final String SENDER_ID = REQUEST_BODY_JSON.getString("sender_id");
         final String BASE_MESSAGE_ID = REQUEST_BODY_JSON.getString("id");
