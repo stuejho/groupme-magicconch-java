@@ -102,8 +102,11 @@ public class MagicConchServlet extends HttpServlet {
     /**
      * Sends a GroupMe message using a given bot ID and message string.
      * 
+     * The message is sent using a POST request.
+     * 
      * @param BOT_ID        the ID of the bot
      * @param MESSAGE       the message to send
+     * @return an HttpResponse result representing the POSTed GroupMe message.
      * 
      * @throws ClientProtocolException - in case of an http protocol error
      * @throws IOException- in case of a problem or the connection was aborted
