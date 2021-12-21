@@ -75,6 +75,7 @@ to use our Heroku app to process group messages.
 
 1. Open up command prompt/Git Bash/terminal
 1. Clone this repository: `git clone https://github.com/stuejho/groupme-magicconch-java`
+1. Move into the cloned directory by executing `cd groupme-magicconch-java`
 1. Add a Heroku remote using the Heroku app name from earlier: `heroku git:remote -a YOUR-APP-NAME`
 1. Set your `GROUPME_BOT_ID` as a config (environment) variable: `heroku config:set GROUPME_BOT_ID=YOUR-BOT-ID`
 1. Deploy the app by pushing it to the `heroku` remote: `git push heroku master`
@@ -88,6 +89,7 @@ Example:
 
 ```console
 $ git clone https://github.com/stuejho/groupme-magicconch-java
+$ cd groupme-magicconch-java
 $ heroku git:remote -a groupme-magicconch-bot
 $ heroku config:set GROUPME_BOT_ID=c4d0e0d9985e49a7096a3afbd2
 $ git push heroku master
